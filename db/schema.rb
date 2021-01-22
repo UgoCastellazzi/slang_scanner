@@ -10,9 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2021_01_22_151212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "artists", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "sentences", force: :cascade do |t|
+    t.bigint "song_id", null: false
+    t.string "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["song_id"], name: "index_sentences_on_song_id"
+  end
+
+  create_table "songs", force: :cascade do |t|
+    t.bigint "artist_id", null: false
+    t.string "name"
+    t.date "release_date"
+    t.string "album"
+    t.integer "genius_views"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["artist_id"], name: "index_songs_on_artist_id"
+  end
+
+  create_table "words", force: :cascade do |t|
+    t.string "name"
+    t.bigint "sentence_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["sentence_id"], name: "index_words_on_sentence_id"
+  end
+
+  add_foreign_key "sentences", "songs"
+  add_foreign_key "songs", "artists"
+  add_foreign_key "words", "sentences"
 end
