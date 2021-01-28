@@ -1,3 +1,5 @@
 class Word < ApplicationRecord
-  belongs_to :sentence
+  has_many :sentences
+
+  has_many :songs, through: :sentences
 end
