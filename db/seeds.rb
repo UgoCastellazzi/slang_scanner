@@ -4,6 +4,8 @@ require 'uri'
 
 # possible d'avoir plusieurs highlits (sentences) dans chaque hits, et donc corresponding paires de ranges
 
+# Song.all.sort { |a,b| a.release_date && b.release_date ? a.release_date <=> b.release_date : a.release_date ? -1 : 1 }
+
 def cleaning
   puts "Cleaning database..."
   Sentence.destroy_all
@@ -53,6 +55,7 @@ def create_elements_for_current_page(hits, word)
     current_artist = Artist.find_or_create_by(compute_artist_info(artist_info))
     if current_artist.valid?
       current_song = Song.find_or_create_by(compute_song_info(song_info, current_artist))
+      current_song.get_genius_info
       current_sentence = Sentence.find_or_create_by(compute_sentence_info(lyric_match, current_song, word))
     end
   end
@@ -61,7 +64,7 @@ end
 def get_genius_search_results(page, word)
     sentence_count_beginning = Sentence.count
 
-    uri = URI.parse("https://genius.com/api/search/lyric?page=#{page}&q=#{word.name}")
+    uri = URI.parse("https://genius.com/api/search/lyric?page=#{page}&q=' #{word.name} '")
     request = Net::HTTP::Get.new(uri)
     request["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:85.0) Gecko/20100101 Firefox/85.0"
     request["Accept"] = "application/json, text/plain, */*"
