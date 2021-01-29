@@ -14,8 +14,6 @@ end
 
 cleaning
 
-moula = Word.create!(name: "moula")
-
 def create_artist(artist)
   Artist.find_or_create_by(
     name: artist.name
@@ -51,10 +49,12 @@ def create_elements_for_current_page(hits, word)
     lyric_match = hit.highlights
     song_info = hit.result
     artist_info = song_info.primary_artist
-  
+    
     current_artist = create_artist(artist_info)
-    current_song = create_song(song_info, current_artist)
-    current_sentence = create_sentence(lyric_match, current_song, word)
+    if current_artist.valid?
+      current_song = create_song(song_info, current_artist)
+      current_sentence = create_sentence(lyric_match, current_song, word)
+    end
   end
 end
 
@@ -87,4 +87,5 @@ def get_genius_search_results(page, word)
     end
   end
   
+  moula = Word.create!(name: "moula")
   get_genius_search_results(1, moula)
