@@ -14,36 +14,34 @@ end
 
 cleaning
 
-moula = Word.create!(name: "moula")
-
-def create_artist(artist)
-  Artist.find_or_create_by(
-    name: artist.name
-    # image: artist.header_image_url
-    # genius_id: artist.id
-    # genius_url: artist.url
-  )
+def compute_artist_info(artist_info)
+  {
+    name: artist_info.name,
+    image: artist_info.image_url,
+    genius_id: artist_info.id,
+    genius_url: artist_info.url
+  }
 end
 
-def create_song(song, artist)
-  Song.find_or_create_by(
+def compute_song_info(song_info, artist)
+  {
     artist: artist,
-    name: song.title
+    name: song_info.title,
+    image: song_info.song_art_image_url,
+    genius_id: song_info.id,
+    genius_url: song_info.url
     # release_date: nil
     # album: nil
     # genius_views: nil
-    # image: song.header_image_url
-    # genius_id: song.id
-    # genius_url: song.url
-  )
+  }
 end
 
-def create_sentence(lyric_matching, song, word)
-  Sentence.create!(
+def compute_sentence_info(lyric_matching, song, word)
+  {
     content: lyric_matching.first.value,
     song: song,
     word: word
-  )
+  }
 end
 
 def create_elements_for_current_page(hits, word)
@@ -51,14 +49,18 @@ def create_elements_for_current_page(hits, word)
     lyric_match = hit.highlights
     song_info = hit.result
     artist_info = song_info.primary_artist
-  
-    current_artist = create_artist(artist_info)
-    current_song = create_song(song_info, current_artist)
-    current_sentence = create_sentence(lyric_match, current_song, word)
+    
+    current_artist = Artist.find_or_create_by(compute_artist_info(artist_info))
+    if current_artist.valid?
+      current_song = Song.find_or_create_by(compute_song_info(song_info, current_artist))
+      current_sentence = Sentence.find_or_create_by(compute_sentence_info(lyric_match, current_song, word))
+    end
   end
 end
 
 def get_genius_search_results(page, word)
+    sentence_count_beginning = Sentence.count
+
     uri = URI.parse("https://genius.com/api/search/lyric?page=#{page}&q=#{word.name}")
     request = Net::HTTP::Get.new(uri)
     request["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:85.0) Gecko/20100101 Firefox/85.0"
@@ -80,11 +82,14 @@ def get_genius_search_results(page, word)
   
     hits = result.sections.first.hits
     create_elements_for_current_page(hits, word)
+
+    sentence_count_end = Sentence.count
+    puts "#{sentence_count_end - sentence_count_beginning} sentences added, total : #{Sentence.count}"
     if result.next_page
       page = result.next_page
-      puts page
       get_genius_search_results(page, word)
     end
   end
   
+  moula = Word.create!(name: "moula")
   get_genius_search_results(1, moula)
