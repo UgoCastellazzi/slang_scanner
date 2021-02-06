@@ -16,4 +16,9 @@ class Song < ApplicationRecord
     self.genius_views = song_info.stats.pageviews
     self.save
   end
+
+  def self.sort_by_increasing_release_date(word)
+    song_list = Song.all.find_all{|song| song.words == word}
+    song_list.sort { |a,b| a.release_date && b.release_date ? a.release_date <=> b.release_date : a.release_date ? -1 : 1 }
+  end
 end

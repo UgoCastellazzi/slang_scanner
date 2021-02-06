@@ -1,11 +1,6 @@
 require 'net/http'
 require 'uri'
 
-
-# possible d'avoir plusieurs highlits (sentences) dans chaque hits, et donc corresponding paires de ranges
-
-# Song.all.sort { |a,b| a.release_date && b.release_date ? a.release_date <=> b.release_date : a.release_date ? -1 : 1 }
-
 def cleaning
   puts "Cleaning database..."
   Sentence.destroy_all
