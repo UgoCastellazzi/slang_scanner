@@ -24,9 +24,6 @@ class GetGeniusSearchResultsJob < ApplicationJob
       image: song_info.song_art_image_url,
       genius_id: song_info.id,
       genius_url: song_info.url
-      # release_date: nil
-      # album: nil
-      # genius_views: nil
     }
   end
   
@@ -43,7 +40,7 @@ class GetGeniusSearchResultsJob < ApplicationJob
       lyric_match = hit.highlights
       song_info = hit.result
       artist_info = song_info.primary_artist
-      
+
       current_artist = Artist.find_or_create_by(compute_artist_info(artist_info))
       if current_artist.valid?
         current_song = Song.find_or_create_by(compute_song_info(song_info, current_artist))
@@ -54,8 +51,6 @@ class GetGeniusSearchResultsJob < ApplicationJob
   end
   
   def get_genius_search_results(page, word)
-      sentence_count_beginning = Sentence.count
-  
       uri = URI.parse("https://genius.com/api/search/lyric?page=#{page}&q=' #{word.name} '")
       request = Net::HTTP::Get.new(uri)
       request["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:85.0) Gecko/20100101 Firefox/85.0"
@@ -77,9 +72,7 @@ class GetGeniusSearchResultsJob < ApplicationJob
     
       hits = result.sections.first.hits
       create_elements_for_current_page(hits, word)
-  
-      sentence_count_end = Sentence.count
-      puts "#{sentence_count_end - sentence_count_beginning} sentences added, total : #{Sentence.count}"
+
       if result.next_page
         page = result.next_page
         get_genius_search_results(page, word)

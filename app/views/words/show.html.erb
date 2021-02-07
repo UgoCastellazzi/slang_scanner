@@ -1,5 +1,7 @@
 <h1><%= @word.name %></h1>
+<h2><%= @word.phonetic_translation %></h2>
+<p><%= @word.definition %></p>
 
-<% @songs.each do |song| %>
-  <li><%= song.genius_url %> <%= song.release_date %></li>
-<% end %>
+<p>Repéré dans <%= @word.songs.count %> chansons, pour la première fois dans <%= @songs.first.name%> de <%= @songs.first.artist.name %> </p>
+
+<p><%= @top_sentence %></p>

@@ -2,7 +2,7 @@ require 'json'
 require 'open-uri'
 
 class Song < ApplicationRecord
-  has_many :sentences
+  has_many :sentences, dependent: :destroy
   belongs_to :artist
 
   has_many :words, through: :sentences
