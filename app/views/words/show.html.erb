@@ -1,0 +1,5 @@
+<h1><%= @word.name %></h1>
+
+<% @songs.each do |song| %>
+  <li><%= song.genius_url %> <%= song.release_date %></li>
+<% end %>
