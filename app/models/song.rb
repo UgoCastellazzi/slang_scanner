@@ -2,11 +2,10 @@ require 'json'
 require 'open-uri'
 
 class Song < ApplicationRecord
-  has_many :sentences
-  belongs_to :album
+  has_many :sentences, dependent: :destroy
+  belongs_to :artist
 
   has_many :words, through: :sentences
-  has_one :artist, through: :albums
 
   def get_genius_info
     api_key = ENV["GENIUS_API_KEY"]
