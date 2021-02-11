@@ -3,6 +3,6 @@ class WordsController < ApplicationController
     @word = Word.find(params[:id])
     @songs = @word.order_songs_by_increasing_release_date
     @sentences = @word.sentences
-    @top_sentence = @word.get_top_song.sentences.first.content
+    @top_sentence = @word.get_top_song.sentences.first
   end
 end
