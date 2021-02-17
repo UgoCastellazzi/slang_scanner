@@ -14,8 +14,7 @@
       <p class="top-sentence-source"><%= @top_sentence.song.artist.name %> - <%= @top_sentence.song.name %></p>
     </div>
     <div class="word-firstsong-container">
-      <p class="first-song">
-        Repéré dans <span class="first-song first-song-bold"> <%= @word.songs.count %> </span> chansons, 
+      <p class="first-song"> Repéré dans <span class="first-song first-song-bold"> <%= @word.songs.count %> </span> chansons, 
         pour la première fois dans <span class="first-song first-song-bold"> <%= @songs.first.name%> </span>
         de <span class="first-song first-song-bold"> <%= @songs.first.artist.name %> </span>
       </p>
