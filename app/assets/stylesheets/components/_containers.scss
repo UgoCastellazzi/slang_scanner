@@ -1,0 +1,29 @@
+.inline-container {
+  display: flex;
+}
+
+.word-container {
+  background-color: $yellow;
+  padding: 40px;
+}
+
+.word-meta-info-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.word-quote-container {
+  background-color: white;
+  width: 35vw;
+  padding: 40px 30px 40px 30px;
+}
+
+.word-firstsong-container {
+  background-color: $light-gray;
+  width: 35vw;
+  padding: 40px 30px 40px 30px;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}

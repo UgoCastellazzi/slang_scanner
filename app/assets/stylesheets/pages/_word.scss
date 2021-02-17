@@ -1,0 +1,39 @@
+.title {
+  font-weight: 700;
+  font-family: "Playfair Display", "Helvetica", "sans-serif";
+  font-size: 3rem;
+  color: $black;
+}
+
+.definition {
+  margin-top: 40px;
+  color: $gray;
+}
+
+.top-sentence {
+  font-size: 1.5rem;
+  color: $black;
+  font-family: "Lora", "Helvetica", "sans-serif";
+  font-style: italic;
+  white-space: pre-line;
+}
+
+.top-sentence-source {
+  font-family: "Lora", "Helvetica", "sans-serif";
+  font-size: 1.3rem;
+  font-style: italic;
+  text-decoration: underline;
+}
+
+.first-song {
+  font-size: 1.5rem;
+  margin-bottom: 0;
+  color: $black;
+  font-family: "Lora", "Helvetica", "sans-serif";
+  font-style: italic;
+}
+
+.first-song-bold {
+  font-size: 1.8rem;
+  font-weight: 500;
+}
