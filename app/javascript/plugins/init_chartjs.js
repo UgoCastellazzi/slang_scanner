@@ -8,35 +8,49 @@ const init_chartjs = () => {
     data: {
         labels: JSON.parse(chartContainer.dataset.labels),
         datasets: [{
-            label: 'Utilisations',
+            label: 'Mentions',
             backgroundColor: 'rgb(255, 238, 159)',
             data: JSON.parse(chartContainer.dataset.usage),
             hoverBackgroundColor: 'rgb(255, 208, 8)'
         }]
     },
     options: {
+      tooltips: {
+        backgroundColor: 'rgb(255, 208, 8)',
+        displayColors: false
+      },
       legend: {
         display: false
       },
       scales: {
         xAxes: [{
           gridLines: {
-              drawOnChartArea: false
+              drawOnChartArea: false,
+              drawTicks: false
+          },
+          ticks: {
+            padding: 20
           }
         }],
         yAxes: [{
           gridLines: {
-              drawOnChartArea: false
+              drawOnChartArea: false,
+              drawTicks: false
           },
           scaleLabel: {
             display:true,
-            labelString: "Utilisations",
-            fontSize: '14',
+            labelString: "Mentions",
+            fontSize: '16',
+            fontFamily: 'Roboto',
+          },
+          ticks: {
+            padding: 10,
+            min: 0
           }
         }]
       }
     }
-});
+  });
 }
 
 export { init_chartjs }
