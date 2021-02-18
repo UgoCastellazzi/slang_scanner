@@ -6,6 +6,9 @@
       <p class="definition"><%= @word.definition %></p>
     </div>
     <div class="word-data-container">
+      <div class="chart-container" id="chart-container" data-labels="<%= @songs_data.keys %>" data-usage="<%= @songs_data.values %>">
+        <canvas id="usageChart" ></canvas>
+      </div>
     </div>
   </div>
   <div class="word-meta-info-container">

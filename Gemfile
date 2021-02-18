@@ -34,6 +34,7 @@ gem 'simple_form'
 
 
 gem 'dotenv-rails', groups: [:development, :test]
+gem 'groupdate'
 
 group :development, :test do
   gem 'pry-byebug'
