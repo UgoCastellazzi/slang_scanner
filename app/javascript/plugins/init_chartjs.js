@@ -1,8 +1,13 @@
 const Chart = require("chart.js")
 
+const ctx = document.getElementById('usageChart').getContext('2d')
+
+const manageEvent = (chart, index) => {
+  console.log(chart.data.labels[index]);
+}
+
 const init_chartjs = () => {
   const chartContainer = document.getElementById('chart-container');
-  const ctx = document.getElementById('usageChart').getContext('2d');
   const chart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -14,10 +19,16 @@ const init_chartjs = () => {
             hoverBackgroundColor: 'rgb(255, 208, 8)'
         }]
     },
+    
     options: {
+      onClick: 
+        function handleClick(evt) {
+            const index = chart.getElementAtEvent(evt)[0]._index;
+            manageEvent(chart, index);
+        },
       tooltips: {
         backgroundColor: 'rgb(255, 208, 8)',
-        displayColors: false
+        displayColors: false,
       },
       legend: {
         display: false
@@ -45,7 +56,8 @@ const init_chartjs = () => {
           },
           ticks: {
             padding: 10,
-            min: 0
+            min: 0,
+            autoSkip: false
           }
         }]
       }
