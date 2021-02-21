@@ -10,6 +10,18 @@
         <canvas id="usageChart" ></canvas>
       </div>
     </div>
+    <div class="word-songs-container">
+      <% @songs.each do |song| %>
+      <div class="song-card">
+        <img src="<%= song.artist.image %>" alt="" class="song-card-image">
+        <div class="song-card-text">
+          <p class="song-card-title"><%= song.artist.name %> - <%= song.name %></p>
+          <p class="song-card-content"><%= song.get_sentence_containing_word(@word).content %></p>
+        </div>
+
+      </div>
+      <% end %>
+    </div>
   </div>
   <div class="word-meta-info-container">
     <div class="word-quote-container">

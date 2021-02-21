@@ -16,4 +16,8 @@ class Song < ApplicationRecord
     self.genius_views = song_info.stats.pageviews
     self.save
   end
+
+  def get_sentence_containing_word(word)
+    self.sentences.select {|sentence| sentence.word_id == word.id}.first
+  end
 end
