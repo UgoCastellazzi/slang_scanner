@@ -27,8 +27,10 @@ import "bootstrap";
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
+import { init_chartjs } from '../plugins/init_chartjs';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
+  init_chartjs();
 });
