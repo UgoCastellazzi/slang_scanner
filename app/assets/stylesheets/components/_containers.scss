@@ -21,17 +21,16 @@
   flex-direction: column;
   position: sticky;
   top: 0;
+  width: 50vw;
 }
 
 .word-quote-container {
   background-color: white;
-  width: 35vw;
   padding: 40px 30px 40px 30px;
 }
 
 .word-firstsong-container {
   background-color: $light-gray;
-  width: 35vw;
   padding: 40px 30px 40px 30px;
   flex-grow: 1;
   display: flex;

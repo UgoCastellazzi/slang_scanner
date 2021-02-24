@@ -21,7 +21,7 @@
   margin-left: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .song-card-title {
@@ -33,4 +33,5 @@
   font-size: 12px;
   font-family: "Lora", "Helvetica", "sans-serif";
   font-style: italic;
+  white-space: pre-line;
 }
