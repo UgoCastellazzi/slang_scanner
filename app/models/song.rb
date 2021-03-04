@@ -18,6 +18,6 @@ class Song < ApplicationRecord
   end
 
   def get_sentence_containing_word(word)
-    self.sentences.select {|sentence| sentence.word_id == word.id}.first
+    self.sentences.select {|sentence| sentence.word_id == word.id}.first.content
   end
 end

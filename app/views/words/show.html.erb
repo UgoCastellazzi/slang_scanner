@@ -2,7 +2,7 @@
   <div class="word-container">
     <div class="word-info-container">
       <h1 class="title"><%= @word.name %></h1>
-      <h2><%= @word.phonetic_translation %></h2>
+      <p class="phonetic-translation">\<%= @word.phonetic_translation %>\</p>
       <p class="definition"><%= @word.definition %></p>
     </div>
     <div class="word-data-container">
@@ -12,14 +12,15 @@
     </div>
     <div class="word-songs-container">
       <% @songs.each do |song| %>
-      <div class="song-card <%= song.release_date.strftime('%b %Y').gsub(" ", "-").downcase %>">
-        <img src="<%= song.artist.image %>" alt="" class="song-card-image">
-        <div class="song-card-text">
-          <p class="song-card-title"><%= song.artist.name %> - <%= song.name %> (<%= song.release_date.year %>)</p>
-          <p class="song-card-content"><%= song.get_sentence_containing_word(@word).content %></p>
-        </div>
-
-      </div>
+        <%= link_to song.genius_url, target: :_blank do %>
+          <div class="song-card <%= song.release_date.strftime('%b %Y').gsub(" ", "-").downcase %>">
+            <img src="<%= song.artist.image %>" alt="" class="song-card-image">
+            <div class="song-card-text">
+              <p class="song-card-title"><%= song.artist.name %> - <%= song.name %> (<%= song.release_date.year %>)</p>
+              <p class="song-card-content">...<%= song.get_sentence_containing_word(@word) %>...</p>
+            </div>
+          </div>
+        <% end %>
       <% end %>
     </div>
   </div>

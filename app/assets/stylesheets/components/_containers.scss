@@ -4,7 +4,7 @@
 
 .word-container {
   background-color: $yellow;
-  padding: 60px;
+  padding: 40px 60px;
 }
 
 .chart-container {
@@ -42,4 +42,8 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 16px;
+  a {
+    color: inherit; 
+    text-decoration: inherit;
+  }
 }
