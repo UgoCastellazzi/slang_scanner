@@ -1,8 +1,13 @@
 .title {
   font-weight: 700;
   font-family: "Playfair Display", "Helvetica", "sans-serif";
-  font-size: 3rem;
+  font-size: 4rem;
   color: $black;
+}
+
+.phonetic-translation {
+  font-size: 2rem;
+  font-family: "Lora", "Helvetica", "sans-serif";
 }
 
 .definition {

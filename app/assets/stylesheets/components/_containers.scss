@@ -4,36 +4,46 @@
 
 .word-container {
   background-color: $yellow;
-  padding: 60px;
+  padding: 40px 60px;
 }
 
 .chart-container {
   background-color: white;
   padding: 40px;
   margin-top: 50px;
-  // width: 200px;
-  // height: 200px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.05);
-  border-radius: 2px;
+  border-radius: 1px;
 }
 
 .word-meta-info-container {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  position: sticky;
+  top: 0;
+  width: 50vw;
 }
 
 .word-quote-container {
   background-color: white;
-  width: 35vw;
   padding: 40px 30px 40px 30px;
 }
 
 .word-firstsong-container {
   background-color: $light-gray;
-  width: 35vw;
   padding: 40px 30px 40px 30px;
   flex-grow: 1;
   display: flex;
   align-items: center;
+}
+
+.word-songs-container {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 16px;
+  a {
+    color: inherit; 
+    text-decoration: inherit;
+  }
 }
