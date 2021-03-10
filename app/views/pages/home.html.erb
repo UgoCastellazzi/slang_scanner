@@ -1,2 +1,21 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="search-container">
+  <h1 class="search-title">Slang<span>[scanner]</span></h1>
+  <p>L'analyse du vocabulaire du rap game français</p>
+  <form action="/" method="get">
+    <input type="text" name="word" value="<%= params[:word] %>" placeholder="Quel mot voulez-vous chercher ?">
+    <input type="submit" value="rechercher">
+  </form>
+</div>
+<div class="home-cards-container">
+  <div class="word-cards-grid">
+    <% @words.each do |word| %>
+      <%= link_to word_path(word) do %>
+        <div class="word-card">
+          <p class="word-card-title"><%= word.name %></p>
+          <p class="word-card-phonetic">\<%= word.phonetic_translation %>\</p>
+          <p class="word-card-definition"><%= word.definition %></p>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
